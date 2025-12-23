@@ -570,7 +570,8 @@ func (c chainG[T]) Update(ctx context.Context, name string, value any) (rowsAffe
 }
 
 func (c chainG[T]) Updates(ctx context.Context, t any) (rowsAffected int, err error) {
-	res := c.g.apply(ctx).Updates(t)
+	var r T
+	res := c.g.apply(ctx).Model(r).Updates(t)
 	return int(res.RowsAffected), res.Error
 }
 
